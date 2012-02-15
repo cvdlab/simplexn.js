@@ -1,0 +1,21 @@
+{
+  "author": {
+    "name" : "cvd-lab",
+    "email" : "cvd-lab@email.com",
+    "url" : "https://github.com/cvd-lab/"
+  },
+  "name": "simplexn",
+  "description": "dimension-independent geometric kernel based on simplicial complex",
+  "version": "0.0.0",
+  "homepage": "https://github.com/cvd-lab/simplexn",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cvd-lab/simplexn.git"
+  },
+  "main": "index.js",
+  "engines": {
+    "node": "*"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
