@@ -74,7 +74,7 @@
 
         expect(indices).to.be.a(Uint32Array);
         expect(areEqual(indices, expectedIndices)).to.be.ok();
-        expected(pointset.equals(expectedPointset)).to.be.ok();
+        expect(pointset.equals(expectedPointset)).to.be.ok();
       });
 
       it('filter simple duplicate', function () {
@@ -90,7 +90,7 @@
 
         expect(indices).to.be.a(Uint32Array);
         expect(areEqual(indices, expectedIndices)).to.be.ok();
-        expected(pointset.equals(expectedPointset)).to.be.ok();
+        expect(pointset.equals(expectedPointset)).to.be.ok();
       });
 
       it('fix precision for all point in a pointset', function () {
@@ -106,7 +106,7 @@
 
         expect(indices).to.be.a(Uint32Array);
         expect(areEqual(indices, expectedIndices)).to.be.ok();
-        expected(pointset.equals(expectedPointset)).to.be.ok();
+        expect(pointset.equals(expectedPointset)).to.be.ok();
       });
 
       it('fix precision and merge duplicates for all point in a pointset', function () {
@@ -122,7 +122,7 @@
 
         expect(indices).to.be.a(Uint32Array);
         expect(areEqual(indices, expectedIndices)).to.be.ok();
-        expected(pointset.equals(expectedPointset)).to.be.ok();
+        expect(pointset.equals(expectedPointset)).to.be.ok();
       });
     })
   });
@@ -140,7 +140,7 @@
         ;
 
       expect(filteredPointset.equals(expectedPointset)).to.be.ok();
-      expected(pointset.equals(clonedPointset)).to.be.ok();
+      expect(pointset.equals(clonedPointset)).to.be.ok();
     });
   });
 
