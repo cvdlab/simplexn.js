@@ -1,13 +1,4 @@
 (function () {
-  var flat = function (aa) {
-    var res = [];
-
-    aa.forEach(function (item) {
-      res = res.concat(item);
-    });
-
-    return res;
-  };
 
   var compareBufferArray = function (ba1, ba2) {
     var ba1Len = ba1.length
@@ -29,12 +20,11 @@
     
     describe('#merge(precision)', function () {
       it('does not change a pointset with nothig to merge', function () {
-        var pointArray = [[.2,0,0],[0,.2,0],[0,0,.2],[.2,.2,.2],[.21,0,0],[0,.26,0],[0,0,.19],[.2,.2,.21],[.2,.2,.23]]
+        var points = [[.2,0,0],[0,.2,0],[0,0,.2],[.2,.2,.2],[.21,0,0],[0,.26,0],[0,0,.19],[.2,.2,.21],[.2,.2,.23]]
           , expectedPointArray = [[.2,0,0],[0,.2,0],[0,0,.2],[.2,.2,.2],[.21,0,0],[0,.26,0],[0,0,.19],[.2,.2,.21],[.2,.2,.23]]
-          , expectedVertices = new Float32Array(flat(expectedPointArray))
+          , expectedVertices = new Float32Array(simplexn._flat(expectedPointArray))
           , expectedIndicesArray = [0,1,2,3,4,5,6,7,8]
           , expectedIndices = new Uint32Array(expectedIndicesArray)
-          , points = new Float32Array(flat(pointArray))
           , ps = new simplexn.PointSet(points, 3)
           , indices = ps.merge(1e-2)
           , vertices = ps.vertices
@@ -47,12 +37,11 @@
       });
 
       it('filter simple duplicate', function () {
-        var pointArray = [[.2,0,0],[0,.2,0],[.2,0,0],[.2,0,0],[.2,0,0],[0,0,.2],[.2,.2,.2],[.21,0,0],[0,.26,0],[0,0,.19],[.2,.2,.21],[.2,.2,.23],[.21,0,0]]
+        var points = [[.2,0,0],[0,.2,0],[.2,0,0],[.2,0,0],[.2,0,0],[0,0,.2],[.2,.2,.2],[.21,0,0],[0,.26,0],[0,0,.19],[.2,.2,.21],[.2,.2,.23],[.21,0,0]]
           , expectedPointArray = [[.2,0,0],[0,.2,0],[0,0,.2],[.2,.2,.2],[.21,0,0],[0,.26,0],[0,0,.19],[.2,.2,.21],[.2,.2,.23]]
-          , expectedVertices = new Float32Array(flat(expectedPointArray))
+          , expectedVertices = new Float32Array(simplexn._flat(expectedPointArray))
           , expectedIndicesArray = [0,1,0,0,0,2,3,4,5,6,7,8,4]
           , expectedIndices = new Uint32Array(expectedIndicesArray)
-          , points = new Float32Array(flat(pointArray))
           , ps = new simplexn.PointSet(points, 3)
           , indices = ps.merge(1e-2)
           , vertices = ps.vertices
@@ -65,12 +54,11 @@
       });
 
       it('fix precision for all point in a pointset', function () {
-        var pointArray = [[.2,0,0],[0,.2,0],[0,0,.2],[.2,.2,.2],[.21,0,0],[0,.24,0],[0,0,.19],[.2222,.2,.21],[.2,.2,.23]]
+        var points = [[.2,0,0],[0,.2,0],[0,0,.2],[.2,.2,.2],[.21,0,0],[0,.24,0],[0,0,.19],[.2222,.2,.21],[.2,.2,.23]]
           , expectedPointArray = [[.2,0,0],[0,.2,0],[0,0,.2],[.2,.2,.2],[.21,0,0],[0,.24,0],[0,0,.19],[.22,.2,.21],[.2,.2,.23]]
-          , expectedVertices = new Float32Array(flat(expectedPointArray))
+          , expectedVertices = new Float32Array(simplexn._flat(expectedPointArray))
           , expectedIndicesArray = [0,1,2,3,4,5,6,7,8]
           , expectedIndices = new Uint32Array(expectedIndicesArray)
-          , points = new Float32Array(flat(pointArray))
           , ps = new simplexn.PointSet(points, 3)
           , indices = ps.merge(1e-2)
           , vertices = ps.vertices
@@ -83,12 +71,11 @@
       });
 
       it('fix precision and merge duplicates for all point in a pointset', function () {
-        var pointArray = [[.2,0,0],[0,.2,0],[.2,0,0],[.2,0,0],[.2,0,0],[0,0,.2],[.2,.2,.2],[.21,0,0],[0,.24,0],[0,0,.19],[.2222,.2,.21],[.2,.2,.23],[.21,0,0]]
+        var points = [[.2,0,0],[0,.2,0],[.2,0,0],[.2,0,0],[.2,0,0],[0,0,.2],[.2,.2,.2],[.21,0,0],[0,.24,0],[0,0,.19],[.2222,.2,.21],[.2,.2,.23],[.21,0,0]]
           , expectedPointArray = [[.2,0,0],[0,.2,0],[0,0,.2],[.2,.2,.2]]
-          , expectedVertices = new Float32Array(flat(expectedPointArray))
+          , expectedVertices = new Float32Array(simplexn._flat(expectedPointArray))
           , expectedIndicesArray = [0,1,0,0,0,2,3,0,1,2,3,3,0]
           , expectedIndices = new Uint32Array(expectedIndicesArray)
-          , points = new Float32Array(flat(pointArray))
           , ps = new simplexn.PointSet(points, 3)
           , indices = ps.merge(1e-1)
           , vertices = ps.vertices
