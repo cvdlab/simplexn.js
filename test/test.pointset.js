@@ -142,8 +142,6 @@
           return point[2] >= 0;
         });
 
-        console.log(expectedPointset, filteredPointset);
-
         expect(filteredPointset.equals(expectedPointset)).to.be.ok();
         expect(pointset.equals(clonedPointset)).to.be.ok();
       });
