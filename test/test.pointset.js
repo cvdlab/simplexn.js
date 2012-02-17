@@ -145,7 +145,29 @@
         expect(filteredPointset.equals(expectedPointset)).to.be.ok();
         expect(pointset.equals(clonedPointset)).to.be.ok();
       });
+    });
 
+    describe('#embed(pointSet)', function () {
+
+      it('embeds the point set in a lower dimensional space', function () {
+        var points1 = [[1, 2, 3], [4.1, 4.2, 4.3], [-7, Math.PI, 0.0]]
+          , points2 = [[1, 2], [4.1, 4.2], [-7, Math.PI]]
+          , pointSet1 = new simplexn.PointSet(points1)
+          , pointSet2 = new simplexn.PointSet(points2)
+          ;
+
+        expect(pointSet1.embed(2).equals(pointSet2)).ok();
+      });
+
+      it('embeds the point set in a higher dimensional space', function () {
+        var points1 = [[1, 2], [4.1, 4.2], [-7, Math.PI]]
+          , points2 = [[1, 2, 0], [4.1, 4.2, 0], [-7, Math.PI, 0]]
+          , pointSet1 = new simplexn.PointSet(points1)
+          , pointSet2 = new simplexn.PointSet(points2)
+          ;
+
+        expect(pointSet1.embed(3).equals(pointSet2)).ok();
+      });
     });
 
     describe('#map(iterator)', function () {
@@ -171,4 +193,4 @@
     });
   });
 
-}).call(this);
+}());
