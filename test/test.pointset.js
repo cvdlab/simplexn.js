@@ -1,4 +1,4 @@
-(function () {
+!(function () {
 
   var areEqual = function (ba1, ba2) {
     var ba1Len = ba1.length
@@ -193,4 +193,4 @@
     });
   });
 
-}());
+}(this));
