@@ -177,8 +177,6 @@
           , expectedPoints = [[2.02,1.01,5.0,0],[2.02,2.01,-5.0,0],[2.02,-1.01,2.0,0],[-2.02,1.01,0.01,-0.60],[2.02,0,0.0,0],[12.02,1.01,-1.0,0]]
           , expectedPointset = new simplexn.PointSet(expectedPoints)
           , pointset = new simplexn.PointSet(points, 4)
-          , clonedPointset = new simplexn.PointSet(points, 4)
-          , filteredPointset
           ;
 
         filteredPointset = pointset.map(function (point) {
@@ -186,8 +184,7 @@
           return point;
         });
 
-        expect(filteredPointset.equals(expectedPointset)).to.be.ok();
-        expect(pointset.equals(clonedPointset)).to.be.ok();
+        expect(pointset.equals(expectedPointset)).to.be.ok();
       });
 
     });
