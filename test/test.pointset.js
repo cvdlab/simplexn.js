@@ -1,23 +1,7 @@
 !(function () {
 
-  var areEqual = function (ba1, ba2) {
-    var ba1Len = ba1.length
-      , ba2Len = ba2.length
-      , res = ba1Len === ba2Len
-      , i
-      ;
-
-    if (res) {
-      for (i = 0; i < ba1Len && res; i++) {
-        res &= ba1[i] === ba2[i];
-      }
-    }
- 
-    return res;
-  }
-
   describe('PointSet', function () {
-    
+  
     describe('#equals(pointSet)', function () {
       
       it('is equal to a point set with the same points', function () {
@@ -73,8 +57,7 @@
           , vertices = pointset.vertices
           ;
 
-        expect(indices).to.be.a(Uint32Array);
-        expect(areEqual(indices, expectedIndices)).to.be.ok();
+        expect(simplexn._areEqual(indices, expectedIndices)).to.be.ok();
         expect(pointset.equals(expectedPointset)).to.be.ok();
       });
 
@@ -89,8 +72,7 @@
           , vertices = pointset.vertices
           ;
 
-        expect(indices).to.be.a(Uint32Array);
-        expect(areEqual(indices, expectedIndices)).to.be.ok();
+        expect(simplexn._areEqual(indices, expectedIndices)).to.be.ok();
         expect(pointset.equals(expectedPointset)).to.be.ok();
       });
 
@@ -105,8 +87,7 @@
           , vertices = pointset.vertices
           ;
 
-        expect(indices).to.be.a(Uint32Array);
-        expect(areEqual(indices, expectedIndices)).to.be.ok();
+        expect(simplexn._areEqual(indices, expectedIndices)).to.be.ok();
         expect(pointset.equals(expectedPointset)).to.be.ok();
       });
 
@@ -121,10 +102,10 @@
           , vertices = pointset.vertices
           ;
 
-        expect(indices).to.be.a(Uint32Array);
-        expect(areEqual(indices, expectedIndices)).to.be.ok();
+        expect(simplexn._areEqual(indices, expectedIndices)).to.be.ok();
         expect(pointset.equals(expectedPointset)).to.be.ok();
       });
+
     });
 
     describe('#filter(iterator)', function () {
@@ -145,6 +126,7 @@
         expect(filteredPointset.equals(expectedPointset)).to.be.ok();
         expect(pointset.equals(clonedPointset)).to.be.ok();
       });
+
     });
 
     describe('#embed(pointSet)', function () {

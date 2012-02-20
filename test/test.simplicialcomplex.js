@@ -1,31 +1,5 @@
 !(function () {
 
-  var flat = function (arrays) {
-    var res = [];
-
-    arrays.forEach(function (item) {
-      res = res.concat(item);
-    });
-
-    return res;
-  };
-
-  var areEqual = function (ba1, ba2) {
-    var ba1Len = ba1.length
-      , ba2Len = ba2.length
-      , res = ba1Len === ba2Len
-      , i
-      ;
-
-    if (res) {
-      for (i = 0; i < ba1Len && res; i++) {
-        res &= ba1[i] === ba2[i];
-      }
-    }
- 
-    return res;
-  };
-
   describe('SimplicialComplex', function () {
 
     describe('#_computeTopology()', function () {
@@ -37,23 +11,19 @@
           , faces1d = [[2,3],[3,1],[1,2],[2,0],[0,3],[3,2],[1,3],[3,0],[0,1],[1,0],[0,2],[2,1]]
           , expectedFaces = [
               new Uint32Array() // 0D 
-            , new Uint32Array(flat(faces1d)) // 1D
-            , new Uint32Array(flat(faces2d)) // 2D
-            , new Uint32Array(flat(faces3d)) // 3D
+            , new Uint32Array(simplexn._flat(faces1d)) // 1D
+            , new Uint32Array(simplexn._flat(faces2d)) // 2D
+            , new Uint32Array(simplexn._flat(faces3d)) // 3D
             ]
           , sc = new simplexn.SimplicialComplex(vertices, faces3d)
           , topology = sc.topology
           ;
 
         expect(topology).to.be.a(Array);
-        expect(topology[0]).to.be.a(Uint32Array);
-        expect(topology[1]).to.be.a(Uint32Array);
-        expect(topology[2]).to.be.a(Uint32Array);
-        expect(topology[3]).to.be.a(Uint32Array);
-        expect(areEqual(topology[0], expectedFaces[0])).to.be.ok();
-        expect(areEqual(topology[1], expectedFaces[1])).to.be.ok();
-        expect(areEqual(topology[2], expectedFaces[2])).to.be.ok();
-        expect(areEqual(topology[3], expectedFaces[3])).to.be.ok();
+        expect(simplexn._areEqual(topology[0], expectedFaces[0])).to.be.ok();
+        expect(simplexn._areEqual(topology[1], expectedFaces[1])).to.be.ok();
+        expect(simplexn._areEqual(topology[2], expectedFaces[2])).to.be.ok();
+        expect(simplexn._areEqual(topology[3], expectedFaces[3])).to.be.ok();
       });
 
       it('correctly computes topology of a simplicial complex made by one tetrahedron whit unuseful points', function () {
@@ -63,23 +33,19 @@
           , faces1d = [[3,4],[4,1],[1,3],[3,0],[0,4],[4,3],[1,4],[4,0],[0,1],[1,0],[0,3],[3,1]]
           , expectedFaces = [
               new Uint32Array() // 0D 
-            , new Uint32Array(flat(faces1d)) // 1D
-            , new Uint32Array(flat(faces2d)) // 2D
-            , new Uint32Array(flat(faces3d)) // 3D
+            , new Uint32Array(simplexn._flat(faces1d)) // 1D
+            , new Uint32Array(simplexn._flat(faces2d)) // 2D
+            , new Uint32Array(simplexn._flat(faces3d)) // 3D
             ]
           , sc = new simplexn.SimplicialComplex(vertices, faces3d)
           , topology = sc.topology
           ;
 
         expect(topology).to.be.a(Array);
-        expect(topology[0]).to.be.a(Uint32Array);
-        expect(topology[1]).to.be.a(Uint32Array);
-        expect(topology[2]).to.be.a(Uint32Array);
-        expect(topology[3]).to.be.a(Uint32Array);
-        expect(areEqual(topology[0], expectedFaces[0])).to.be.ok();
-        expect(areEqual(topology[1], expectedFaces[1])).to.be.ok();
-        expect(areEqual(topology[2], expectedFaces[2])).to.be.ok();
-        expect(areEqual(topology[3], expectedFaces[3])).to.be.ok();
+        expect(simplexn._areEqual(topology[0], expectedFaces[0])).to.be.ok();
+        expect(simplexn._areEqual(topology[1], expectedFaces[1])).to.be.ok();
+        expect(simplexn._areEqual(topology[2], expectedFaces[2])).to.be.ok();
+        expect(simplexn._areEqual(topology[3], expectedFaces[3])).to.be.ok();
       });
 
       it('correctly computes topology of a simplicial complex made by three tetrahedrons', function () {
@@ -92,23 +58,19 @@
                       ]
           , expectedFaces = [
               new Uint32Array() // 0D 
-            , new Uint32Array(flat(faces1d)) // 1D
-            , new Uint32Array(flat(faces2d)) // 2D
-            , new Uint32Array(flat(faces3d)) // 3D
+            , new Uint32Array(simplexn._flat(faces1d)) // 1D
+            , new Uint32Array(simplexn._flat(faces2d)) // 2D
+            , new Uint32Array(simplexn._flat(faces3d)) // 3D
             ]
           , sc = new simplexn.SimplicialComplex(vertices, faces3d)
           , topology = sc.topology
           ;
 
         expect(topology).to.be.a(Array);
-        expect(topology[0]).to.be.a(Uint32Array);
-        expect(topology[1]).to.be.a(Uint32Array);
-        expect(topology[2]).to.be.a(Uint32Array);
-        expect(topology[3]).to.be.a(Uint32Array);
-        expect(areEqual(topology[3], expectedFaces[3])).to.be.ok();
-        expect(areEqual(topology[2], expectedFaces[2])).to.be.ok();
-        expect(areEqual(topology[1], expectedFaces[1])).to.be.ok();
-        expect(areEqual(topology[0], expectedFaces[0])).to.be.ok();
+        expect(simplexn._areEqual(topology[3], expectedFaces[3])).to.be.ok();
+        expect(simplexn._areEqual(topology[2], expectedFaces[2])).to.be.ok();
+        expect(simplexn._areEqual(topology[1], expectedFaces[1])).to.be.ok();
+        expect(simplexn._areEqual(topology[0], expectedFaces[0])).to.be.ok();
       });
 
       it('correctly computes topology of a 4D simplex', function () {
@@ -129,26 +91,21 @@
                       ]
           , expectedFaces = [
               new Uint32Array() // 0D 
-            , new Uint32Array(flat(faces1d)) // 1D
-            , new Uint32Array(flat(faces2d)) // 2D
-            , new Uint32Array(flat(faces3d)) // 3D
-            , new Uint32Array(flat(faces4d)) // 4D
+            , new Uint32Array(simplexn._flat(faces1d)) // 1D
+            , new Uint32Array(simplexn._flat(faces2d)) // 2D
+            , new Uint32Array(simplexn._flat(faces3d)) // 3D
+            , new Uint32Array(simplexn._flat(faces4d)) // 4D
             ]
           , sc = new simplexn.SimplicialComplex(vertices, faces4d)
           , topology = sc.topology
           ;
 
         expect(topology).to.be.a(Array);
-        expect(topology[0]).to.be.a(Uint32Array);
-        expect(topology[1]).to.be.a(Uint32Array);
-        expect(topology[2]).to.be.a(Uint32Array);
-        expect(topology[3]).to.be.a(Uint32Array);
-        expect(topology[4]).to.be.a(Uint32Array);
-        expect(areEqual(topology[4], expectedFaces[4])).to.be.ok();
-        expect(areEqual(topology[3], expectedFaces[3])).to.be.ok();
-        expect(areEqual(topology[2], expectedFaces[2])).to.be.ok();
-        expect(areEqual(topology[1], expectedFaces[1])).to.be.ok();
-        expect(areEqual(topology[0], expectedFaces[0])).to.be.ok();
+        expect(simplexn._areEqual(topology[4], expectedFaces[4])).to.be.ok();
+        expect(simplexn._areEqual(topology[3], expectedFaces[3])).to.be.ok();
+        expect(simplexn._areEqual(topology[2], expectedFaces[2])).to.be.ok();
+        expect(simplexn._areEqual(topology[1], expectedFaces[1])).to.be.ok();
+        expect(simplexn._areEqual(topology[0], expectedFaces[0])).to.be.ok();
       });
     });
 
@@ -186,6 +143,16 @@
         expect(simpcomp1.equals(simpcomp2)).to.not.be.ok();
       });
 
+      it('states that 2 simplicial complex made by same vertices and faces of different dimension are not equal', function () {
+        var vertices = [[0,0,0,0],[2,0,0,0],[0,2,0,0],[0,0,2,0],[0,0,0,2]]
+          , faces1 = [[0,1,2,3,4]]
+          , faces2 = [[1,2,3,4],[4,2,3,0],[0,1,3,4],[4,1,2,0],[0,1,2,3]]
+          , simpcomp1 = new simplexn.SimplicialComplex(vertices, faces1)
+          , simpcomp2 = new simplexn.SimplicialComplex(vertices, faces2)
+          ;
+
+        expect(simpcomp1.equals(simpcomp2)).to.not.be.ok();
+      });
     });
   });
 
