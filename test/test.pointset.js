@@ -161,7 +161,7 @@
           , pointset = new simplexn.PointSet(points, 4)
           ;
 
-        filteredPointset = pointset.map(function (point) {
+        pointset.map(function (point) {
           point[0] = 2 * point[0];
           return point;
         });
