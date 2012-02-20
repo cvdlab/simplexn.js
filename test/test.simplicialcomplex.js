@@ -31,7 +31,7 @@
     describe('#_computeTopology()', function () {
 
       it('correctly computes topology of a simplicial complex made by one tetrahedron', function () {
-        var vertex = [[0,0,0],[2,0,0],[0,2,0],[0,0,2]]
+        var vertices = [[0,0,0],[2,0,0],[0,2,0],[0,0,2]]
           , faces3d = [[0,1,2,3]]
           , faces2d = [[1,2,3],[3,2,0],[0,1,3],[2,1,0]]
           , faces1d = [[2,3],[3,1],[1,2],[2,0],[0,3],[3,2],[1,3],[3,0],[0,1],[1,0],[0,2],[2,1]]
@@ -41,7 +41,7 @@
             , new Uint32Array(flat(faces2d)) // 2D
             , new Uint32Array(flat(faces3d)) // 3D
             ]
-          , sc = new simplexn.SimplicialComplex(vertex, faces3d)
+          , sc = new simplexn.SimplicialComplex(vertices, faces3d)
           , topology = sc.topology
           ;
 
@@ -57,7 +57,7 @@
       });
 
       it('correctly computes topology of a simplicial complex made by one tetrahedron whit unuseful points', function () {
-        var vertex = [[0,0,0],[2,0,0],[5.6,6.7,3.4],[0,2,0],[0,0,2],[1.5,3.5,0]]
+        var vertices = [[0,0,0],[2,0,0],[5.6,6.7,3.4],[0,2,0],[0,0,2],[1.5,3.5,0]]
           , faces3d = [[0,1,3,4]]
           , faces2d = [[1,3,4],[4,3,0],[0,1,4],[3,1,0]]
           , faces1d = [[3,4],[4,1],[1,3],[3,0],[0,4],[4,3],[1,4],[4,0],[0,1],[1,0],[0,3],[3,1]]
@@ -67,7 +67,7 @@
             , new Uint32Array(flat(faces2d)) // 2D
             , new Uint32Array(flat(faces3d)) // 3D
             ]
-          , sc = new simplexn.SimplicialComplex(vertex, faces3d)
+          , sc = new simplexn.SimplicialComplex(vertices, faces3d)
           , topology = sc.topology
           ;
 
@@ -83,7 +83,7 @@
       });
 
       it('correctly computes topology of a simplicial complex made by three tetrahedrons', function () {
-        var vertex = [[0,0,0],[2,0,0],[0,2,0],[0,0,2], [2,2,2], [2,2,0]]
+        var vertices = [[0,0,0],[2,0,0],[0,2,0],[0,0,2], [2,2,2], [2,2,0]]
           , faces3d = [[0,1,2,3],[2,3,1,4],[2,1,5,4]]
           , faces2d = [[1,2,3],[3,2,0],[0,1,3],[2,1,0],  [3,1,4],[4,1,2],[2,3,4],[1,3,2],  [1,5,4],[4,5,2],[2,1,4],[5,1,2] ]
           , faces1d = [[2,3],[3,1],[1,2],[2,0],[0,3],[3,2],[1,3],[3,0],[0,1],[1,0],[0,2],[2,1],
@@ -96,7 +96,7 @@
             , new Uint32Array(flat(faces2d)) // 2D
             , new Uint32Array(flat(faces3d)) // 3D
             ]
-          , sc = new simplexn.SimplicialComplex(vertex, faces3d)
+          , sc = new simplexn.SimplicialComplex(vertices, faces3d)
           , topology = sc.topology
           ;
 
@@ -112,7 +112,7 @@
       });
 
       it('correctly computes topology of a 4D simplex', function () {
-        var vertex = [[0,0,0,0],[2,0,0,0],[0,2,0,0],[0,0,2,0],[0,0,0,2]]
+        var vertices = [[0,0,0,0],[2,0,0,0],[0,2,0,0],[0,0,2,0],[0,0,0,2]]
           , faces4d = [[0,1,2,3,4]]
           , faces3d = [[1,2,3,4],[4,2,3,0],[0,1,3,4],[4,1,2,0],[0,1,2,3]]
           , faces2d = [[2,3,4],[4,3,1],[1,2,4],[3,2,1],
@@ -134,7 +134,7 @@
             , new Uint32Array(flat(faces3d)) // 3D
             , new Uint32Array(flat(faces4d)) // 4D
             ]
-          , sc = new simplexn.SimplicialComplex(vertex, faces4d)
+          , sc = new simplexn.SimplicialComplex(vertices, faces4d)
           , topology = sc.topology
           ;
 
@@ -152,6 +152,41 @@
       });
     });
 
+    describe('#equals(simpcomp)', function () {
+
+      it('states that 2 simplicial complex made by the same vertices and faces are equal', function () {
+        var vertices = [[0,0,0,0],[2,0,0,0],[0,2,0,0],[0,0,2,0],[0,0,0,2]]
+          , faces = [[0,1,2,3,4]]
+          , simpcomp1 = new simplexn.SimplicialComplex(vertices, faces)
+          , simpcomp2 = new simplexn.SimplicialComplex(vertices, faces)
+          ;
+
+        expect(simpcomp1.equals(simpcomp2)).to.be.ok();
+      });
+
+      it('states that 2 simplicial complex made by different vertices and same faces are not equal', function () {
+        var vertices1 = [[0,0,0,0],[2,0,0,0],[0,2,0,0],[0,0,2,0],[0,0,0,2]]
+          , vertices2 = [[0,0,0,0],[2,0,0,0],[0,2,0,0],[0,0,2,0],[0,0.4,0,2]]
+          , faces = [[0,1,2,3,4]]
+          , simpcomp1 = new simplexn.SimplicialComplex(vertices1, faces)
+          , simpcomp2 = new simplexn.SimplicialComplex(vertices2, faces)
+          ;
+
+        expect(simpcomp1.equals(simpcomp2)).to.not.be.ok();
+      });
+
+      it('states that 2 simplicial complex made by same vertices and different faces are not equal', function () {
+        var vertices = [[0,0,0,0],[2,0,0,0],[0,2,0,0],[0,0,2,0],[0,0,0,2]]
+          , faces1 = [[0,1,2,3,4]]
+          , faces2 = [[0,1,4,3,2]]
+          , simpcomp1 = new simplexn.SimplicialComplex(vertices, faces1)
+          , simpcomp2 = new simplexn.SimplicialComplex(vertices, faces2)
+          ;
+
+        expect(simpcomp1.equals(simpcomp2)).to.not.be.ok();
+      });
+
+    });
   });
 
 }(this));
