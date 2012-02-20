@@ -54,7 +54,7 @@
           , expectedIndices = new Uint32Array(expectedIndicesArray)
           , pointset = new simplexn.PointSet(points, 3)
           , indices = pointset.merge(1e-2)
-          , vertices = pointset.vertices
+          // , vertices = pointset.vertices
           ;
 
         expect(simplexn._areEqual(indices, expectedIndices)).to.be.ok();
