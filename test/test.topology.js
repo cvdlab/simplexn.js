@@ -144,6 +144,100 @@
         expect(simplexn._areEqual(complexes[4], expectedComplexes[4])).to.be.ok();
       });
     });
+
+
+    describe('#skeleton(dim)', function () {
+
+      it('if dim is 1, the higher cell complex has dim 1', function () {
+        var cells3d = [[0,1,2,3],[2,3,1,4],[2,1,5,4]]
+          , cells2d = [
+              [1,2,3],[3,2,0],[0,1,3],[2,1,0]
+            , [3,1,4],[4,1,2],[2,3,4],[1,3,2]
+            , [1,5,4],[4,5,2],[2,1,4],[5,1,2]
+            ]
+          , cells1d = [
+              [2,3],[3,1],[1,2]
+            , [2,0],[0,3],[3,2]
+            , [1,3],[3,0],[0,1]
+            , [1,0],[0,2],[2,1]
+
+            , [1,4],[4,3],[3,1]
+            , [1,2],[2,4],[4,1]
+            , [3,4],[4,2],[2,3]
+            , [3,2],[2,1],[1,3]
+
+            , [5,4],[4,1],[1,5]
+            , [5,2],[2,4],[4,5]
+            , [1,4],[4,2],[2,1]
+            , [1,2],[2,5],[5,1]
+            ]
+          , expectedFaces = [
+                new Uint32Array([]) // 0D 
+              , new Uint32Array(simplexn._flat(cells1d)) // 1D
+              , new Uint32Array(simplexn._flat(cells2d)) // 2D
+            ]
+          , topology = new simplexn.Topology(cells3d)
+          , skeleton = topology.skeleton(1)
+          , complexes = skeleton.complexes
+          ;
+
+        expect(complexes).to.be.a(Array);
+        expect(complexes[0]).to.be.a(Uint32Array);
+        expect(complexes[1]).to.be.a(Uint32Array);
+        expect(complexes[2]).to.be(undefined);
+        expect(complexes[3]).to.be(undefined);
+        expect(simplexn._areEqual(complexes[0], expectedFaces[0])).to.be.ok();      
+        expect(simplexn._areEqual(complexes[1], expectedFaces[1])).to.be.ok();
+        expect(topology.dim).to.be(1);
+      });
+
+      it('if dim is 2, the higher cell complex has dim 2', function () {
+        var cells3d = [[0,1,2,3],[2,3,1,4],[2,1,5,4]]
+          , cells2d = [
+              [1,2,3],[3,2,0],[0,1,3],[2,1,0]
+            , [3,1,4],[4,1,2],[2,3,4],[1,3,2]
+            , [1,5,4],[4,5,2],[2,1,4],[5,1,2]
+            ]
+          , cells1d = [
+              [2,3],[3,1],[1,2]
+            , [2,0],[0,3],[3,2]
+            , [1,3],[3,0],[0,1]
+            , [1,0],[0,2],[2,1]
+
+            , [1,4],[4,3],[3,1]
+            , [1,2],[2,4],[4,1]
+            , [3,4],[4,2],[2,3]
+            , [3,2],[2,1],[1,3]
+
+            , [5,4],[4,1],[1,5]
+            , [5,2],[2,4],[4,5]
+            , [1,4],[4,2],[2,1]
+            , [1,2],[2,5],[5,1]
+            ]
+          , expectedFaces = [
+                new Uint32Array([]) // 0D 
+              , new Uint32Array(simplexn._flat(cells1d)) // 1D
+              , new Uint32Array(simplexn._flat(cells2d)) // 2D
+            ]
+          , topology = new simplexn.Topology(cells3d)
+          , skeleton = topology.skeleton(2)
+          , complexes = skeleton.complexes
+          ;
+
+        expect(complexes).to.be.a(Array);
+        expect(complexes[0]).to.be.a(Uint32Array);
+        expect(complexes[1]).to.be.a(Uint32Array);
+        expect(complexes[2]).to.be.a(Uint32Array);
+        expect(complexes[3]).to.be(undefined);
+        expect(simplexn._areEqual(complexes[0], expectedFaces[0])).to.be.ok();      
+        expect(simplexn._areEqual(complexes[1], expectedFaces[1])).to.be.ok();
+        expect(simplexn._areEqual(complexes[2], expectedFaces[2])).to.be.ok();
+        expect(topology.dim).to.be(2);
+      });
+
+    });
+
+
   });
 
 }(this));
