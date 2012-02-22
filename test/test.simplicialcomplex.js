@@ -152,6 +152,46 @@
       });
     });
 
+    describe('#skeleton(dim)', function () {
+
+      it('if dim is 1, remove high order cells', function () {
+        var vertex = [[0,0,0],[2,0,0],[0,2,0],[0,0,2], [2,2,2], [2,2,0]]
+          , faces3d = [[0,1,2,3],[2,3,1,4],[2,1,5,4]]
+          , faces2d = [[1,2,3],[3,2,0],[0,1,3],[2,1,0], [3,1,4],[4,1,2],[2,3,4],[1,3,2], [1,5,4],[4,5,2],[2,1,4],[5,1,2]]
+          , faces1d = [[2,3],[3,1],[1,2],[2,0],[0,3],[3,2],[1,3],[3,0],[0,1],[1,0],[0,2],[2,1],
+                       [1,4],[4,3],[3,1],[1,2],[2,4],[4,1],[3,4],[4,2],[2,3],[3,2],[2,1],[1,3],
+                       [5,4],[4,1],[1,5],[5,2],[2,4],[4,5],[1,4],[4,2],[2,1],[1,2],[2,5],[5,1]
+                      ]
+          , expectedFaces = [
+              new Uint32Array() // 0D 
+            , new Uint32Array(flat(faces1d)) // 1D
+            , new Uint32Array(flat(faces2d)) // 2D
+            ]
+          , sc = new simplexn.SimplicialComplex(vertex, faces3d)
+          , skeleton = sc.skeleton(2)
+          ;
+
+        expect(sc.topology).to.be.a(Array);
+        expect(sc.topology[0]).to.be.a(Uint32Array);
+        expect(sc.topology[1]).to.be.a(Uint32Array);
+        expect(sc.topology[2]).to.be.a(Uint32Array);
+        expect(areEqual(sc.topology[0], expectedFaces[0])).to.be.ok();      
+        expect(areEqual(sc.topology[1], expectedFaces[1])).to.be.ok();
+        expect(areEqual(sc.topology[2], expectedFaces[2])).to.be.ok();
+        expect(areEqual(sc.topology[3], expectedFaces[3])).to.be.ok();
+
+        expect(skeleton.topology).to.be.a(Array);
+        expect(skeleton.topology[0]).to.be.a(Uint32Array);
+        expect(skeleton.topology[1]).to.be.a(Uint32Array);
+        expect(skeleton.topology[2]).to.be.a(Uint32Array);
+        expect(areEqual(skeleton.topology[0], expectedFaces[0])).to.be.ok();      
+        expect(areEqual(skeleton.topology[1], expectedFaces[1])).to.be.ok();
+        expect(areEqual(skeleton.topology[2], expectedFaces[2])).to.be.ok();
+        expect(areEqual(skeleton.topology[3] === undefined)).to.be.ok();
+      });
+
+    });
+
   });
 
 }(this));
