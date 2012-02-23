@@ -96,6 +96,17 @@
         expect(cube.equals(simpcomp)).to.be.ok();
       });
     });
+
+    describe('circle(radius, n)', function () {
+      it('correctly instantiates a circle made by 4 segments', function () {
+        var circle = simplexn.geometries.circle(2,4);
+        var points =[[0,2],[2,0],[0,-2],[-2,0]];
+        var cells = [[0,1],[1,2],[2,3],[3,1]];
+        var simpcomp = new simplexn.SimplicialComplex(points,cells);
+
+        expect(circle.equals(simpcomp)).to.be.ok();
+      });
+    });
   });
 
 }(this));
