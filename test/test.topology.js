@@ -185,7 +185,7 @@
         expect(complexes[1]).to.be.a(Uint32Array);
         expect(complexes[2]).to.be(undefined);
         expect(complexes[3]).to.be(undefined);
-        expect(simplexn._areEqual(complexes[0], expectedFaces[0])).to.be.ok();      
+        expect(simplexn._areEqual(complexes[0], expectedFaces[0])).to.be.ok();
         expect(simplexn._areEqual(complexes[1], expectedFaces[1])).to.be.ok();
         expect(topology.dim).to.be(1);
       });
@@ -235,7 +235,6 @@
       });
 
     });
-
 
   });
 
