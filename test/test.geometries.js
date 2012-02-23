@@ -73,7 +73,17 @@
 
         expect(simplexgrid.equals(simpcomp)).to.be.ok();
       });
+    });
 
+    describe('cuboid(sides)', function () {
+      it('correctly instantiates a cuboidal simplicial complex', function () {
+        var cuboid = simplexn.geometries.cuboid([3,2,1]);
+        var points = [[0,0,0],[3,0,0],[0,2,0],[3,2,0],[0,0,1],[3,0,1],[0,2,1],[3,2,1]];
+        var cells = [[0,1,2,4],[1,2,4,5],[2,4,5,6],[3,2,1,7],[2,1,7,6],[1,7,6,5]];
+        var simpcomp = new simplexn.SimplicialComplex(points,cells);
+
+        expect(cuboid.equals(simpcomp)).to.be.ok();
+      });
     });
   });
 
