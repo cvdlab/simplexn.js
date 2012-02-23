@@ -141,7 +141,6 @@
                                [10,9,11,14],[9,11,14,13],[11,14,13,15]];
         var expectedSimpcomp = new simplexn.SimplicialComplex(expectedPoints,expectedCells3d);
         var simpcomp = new simplexn.SimplicialComplex(points, cells2d);
-          ;
 
         simpcomp.extrude(hlist);
 
