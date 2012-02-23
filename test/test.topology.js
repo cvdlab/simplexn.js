@@ -145,7 +145,6 @@
       });
     });
 
-
     describe('#skeleton(dim)', function () {
 
       it('if dim is 1, the higher cell complex has dim 1', function () {
