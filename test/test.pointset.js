@@ -40,6 +40,61 @@
       });
     });
 
+    describe('#map(iterator)', function () {
+
+      it('maps pointset with a mapping function in the same dimension space', function () {
+        var mapping = function (coords) {
+          var x = coords[0];
+          var y = coords[1];
+
+          return [2*x, 3*y];
+        };
+        var points1 = [[1,2],[5,6],[8,9],[4.5,5.4]];
+        var points2 = [[2,6],[10,18],[16,27],[9,16.2]];
+        var pointset1 = new simplexn.PointSet(points1);
+        var pointset2 = new simplexn.PointSet(points2);
+
+        pointset1.map(mapping);
+
+        expect(pointset1.equals(pointset2)).to.be.ok();
+      });
+
+      it('maps pointset with a mapping function in a lower dimension space', function () {
+        var mapping = function (coords) {
+          var x = coords[0];
+          var y = coords[1];
+
+          return [2*x];
+        };
+        var points1 = [[1,2],[5,6],[8,9],[4.5,5.4]];
+        var points2 = [[2],[10],[16],[9]];
+        var pointset1 = new simplexn.PointSet(points1);
+        var pointset2 = new simplexn.PointSet(points2);
+
+        pointset1.map(mapping);
+
+        expect(pointset1.equals(pointset2)).to.be.ok();
+      });
+
+      it('maps pointset with a mapping function in a higher dimension space', function () {
+        var mapping = function (coords) {
+          var x = coords[0];
+          var y = coords[1];
+
+          return [2*x, 3*y, x+y];
+        };
+        var points1 = [[1,2],[5,6],[8,9],[4.5,5.4]];
+        var points2 = [[2,6,3],[10,18,11],[16,27,17],[9,16.2,9.9]];
+        var pointset1 = new simplexn.PointSet(points1);
+        var pointset2 = new simplexn.PointSet(points2);
+
+        pointset1.map(mapping);
+
+        expect(pointset1.equals(pointset2)).to.be.ok();
+      });
+
+    });
+
     describe('#merge(precision)', function () {
 
       it('does not change a pointset with nothig to merge', function () {
@@ -76,7 +131,6 @@
         var expectedIndices = new Uint32Array(expectedIndicesArray);
         var pointset = new simplexn.PointSet(points, 3);
         var indices = pointset.merge(1e-2);
-        var vertices = pointset.vertices;
 
         expect(simplexn._areEqual(indices, expectedIndices)).to.be.ok();
         expect(pointset.equals(expectedPointset)).to.be.ok();
@@ -90,7 +144,6 @@
         var expectedIndices = new Uint32Array(expectedIndicesArray);
         var pointset = new simplexn.PointSet(points, 3);
         var indices = pointset.merge(1e-1);
-        var vertices = pointset.vertices;
 
         expect(simplexn._areEqual(indices, expectedIndices)).to.be.ok();
         expect(pointset.equals(expectedPointset)).to.be.ok();
