@@ -76,7 +76,6 @@
         var expectedIndices = new Uint32Array(expectedIndicesArray);
         var pointset = new simplexn.PointSet(points, 3);
         var indices = pointset.merge(1e-2);
-        var vertices = pointset.vertices;
 
         expect(simplexn._areEqual(indices, expectedIndices)).to.be.ok();
         expect(pointset.equals(expectedPointset)).to.be.ok();
@@ -90,7 +89,6 @@
         var expectedIndices = new Uint32Array(expectedIndicesArray);
         var pointset = new simplexn.PointSet(points, 3);
         var indices = pointset.merge(1e-1);
-        var vertices = pointset.vertices;
 
         expect(simplexn._areEqual(indices, expectedIndices)).to.be.ok();
         expect(pointset.equals(expectedPointset)).to.be.ok();
