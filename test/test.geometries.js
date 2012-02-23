@@ -85,6 +85,17 @@
         expect(cuboid.equals(simpcomp)).to.be.ok();
       });
     });
+
+    describe('cube(d)', function () {
+      it('correctly instantiates a 3D cube', function () {
+        var cube = simplexn.geometries.cube(3);
+        var points = [[0,0,0],[1,0,0],[0,1,0],[1,1,0],[0,0,1],[1,0,1],[0,1,1],[1,1,1]];
+        var cells = [[0,1,2,4],[1,2,4,5],[2,4,5,6],[3,2,1,7],[2,1,7,6],[1,7,6,5]];
+        var simpcomp = new simplexn.SimplicialComplex(points,cells);
+
+        expect(cube.equals(simpcomp)).to.be.ok();
+      });
+    });
   });
 
 }(this));

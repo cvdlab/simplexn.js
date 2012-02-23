@@ -47,7 +47,7 @@
       });
     });
 
-    describe('#merge()', function () {
+    describe('#merge(precision)', function () {
       it('merges a simplecial complex', function () {
         var points = [[0,0],[0.007,0],[0,1],[0.007,1],[0,1.003],[0.007,1.003],[0,2.003],[0.007,2.003]];
         var complexes = [[0,1,2],[3,2,1],[4,5,6],[7,6,5]]
