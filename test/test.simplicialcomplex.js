@@ -4,7 +4,7 @@
 
     describe('#equals(simpcomp)', function () {
 
-      it('states that 2 simplicial complex made by the same vertices and faces are equal', function () {
+      it('states that 2 simplicial complex made by the same points and cells are equal', function () {
         var points = [[0,0,0,0],[2,0,0,0],[0,2,0,0],[0,0,2,0],[0,0,0,2]];
         var complex = [[0,1,2,3,4]];
         var simpcomp1 = new simplexn.SimplicialComplex(points, complex);
@@ -13,34 +13,34 @@
         expect(simpcomp1.equals(simpcomp2)).to.be.ok();
       });
 
-      it('states that 2 simplicial complex made by different vertices and same faces are not equal', function () {
-        var vertices1 = [[0,0,0,0],[2,0,0,0],[0,2,0,0],[0,0,2,0],[0,0,0,2]];
-        var vertices2 = [[0,0,0,0],[2,0,0,0],[0,2,0,0],[0,0,2,0],[0,0.4,0,2]];
-        var faces = [[0,1,2,3,4]];
-        var simpcomp1 = new simplexn.SimplicialComplex(vertices1, faces);
-        var simpcomp2 = new simplexn.SimplicialComplex(vertices2, faces);
+      it('states that 2 simplicial complex made by different points and same cells are not equal', function () {
+        var points1 = [[0,0,0,0],[2,0,0,0],[0,2,0,0],[0,0,2,0],[0,0,0,2]];
+        var points2 = [[0,0,0,0],[2,0,0,0],[0,2,0,0],[0,0,2,0],[0,0.4,0,2]];
+        var cells = [[0,1,2,3,4]];
+        var simpcomp1 = new simplexn.SimplicialComplex(points1, cells);
+        var simpcomp2 = new simplexn.SimplicialComplex(points2, cells);
           ;
 
         expect(simpcomp1.equals(simpcomp2)).to.not.be.ok();
       });
 
-      it('states that 2 simplicial complex made by same vertices and different faces are not equal', function () {
-        var vertices = [[0,0,0,0],[2,0,0,0],[0,2,0,0],[0,0,2,0],[0,0,0,2]];
-        var faces1 = [[0,1,2,3,4]];
-        var faces2 = [[0,1,4,3,2]];
-        var simpcomp1 = new simplexn.SimplicialComplex(vertices, faces1);
-        var simpcomp2 = new simplexn.SimplicialComplex(vertices, faces2);
+      it('states that 2 simplicial complex made by same points and different cells are not equal', function () {
+        var points = [[0,0,0,0],[2,0,0,0],[0,2,0,0],[0,0,2,0],[0,0,0,2]];
+        var cells1 = [[0,1,2,3,4]];
+        var cells2 = [[0,1,4,3,2]];
+        var simpcomp1 = new simplexn.SimplicialComplex(points, cells1);
+        var simpcomp2 = new simplexn.SimplicialComplex(points, cells2);
           ;
 
         expect(simpcomp1.equals(simpcomp2)).to.not.be.ok();
       });
 
-      it('states that 2 simplicial complex made by same vertices and faces of different dimension are not equal', function () {
-        var vertices = [[0,0,0,0],[2,0,0,0],[0,2,0,0],[0,0,2,0],[0,0,0,2]];
-        var faces1 = [[0,1,2,3,4]];
-        var faces2 = [[1,2,3,4],[4,2,3,0],[0,1,3,4],[4,1,2,0],[0,1,2,3]];
-        var simpcomp1 = new simplexn.SimplicialComplex(vertices, faces1);
-        var simpcomp2 = new simplexn.SimplicialComplex(vertices, faces2);
+      it('states that 2 simplicial complex made by same points and cells of different dimension are not equal', function () {
+        var points = [[0,0,0,0],[2,0,0,0],[0,2,0,0],[0,0,2,0],[0,0,0,2]];
+        var cells1 = [[0,1,2,3,4]];
+        var cells2 = [[1,2,3,4],[4,2,3,0],[0,1,3,4],[4,1,2,0],[0,1,2,3]];
+        var simpcomp1 = new simplexn.SimplicialComplex(points, cells1);
+        var simpcomp2 = new simplexn.SimplicialComplex(points, cells2);
           ;
 
         expect(simpcomp1.equals(simpcomp2)).to.not.be.ok();
@@ -142,6 +142,20 @@
         var expectedSimpcomp = new simplexn.SimplicialComplex(expectedPoints,expectedCells3d);
         var simpcomp = new simplexn.SimplicialComplex(points, cells2d);
           ;
+
+        simpcomp.extrude(hlist);
+
+        expect(simpcomp.equals(expectedSimpcomp)).to.be.ok();
+      });
+
+      it('extrudes 2D simplexes - quotes begin with a negative values', function () {
+        var points = [[0],[1],[2]]
+        var cells2d = [[0,1],[1,2]];
+        var hlist = [-2,1,1];
+        var expectedPoints = [[0,2],[1,2],[2,2],[0,3],[1,3],[2,3],[0,4,],[1,4],[2,4]];
+        var expectedCells3d = [[0,1,3],[4,3,1],[1,2,4],[5,4,2],[3,4,6],[7,6,4],[4,5,7],[8,7,5]];
+        var expectedSimpcomp = new simplexn.SimplicialComplex(expectedPoints,expectedCells3d);
+        var simpcomp = new simplexn.SimplicialComplex(points, cells2d);
 
         simpcomp.extrude(hlist);
 
