@@ -290,6 +290,42 @@
         expect(topology.dim).to.be(2);
       });
 
+      it('if dim is 1, the 1d cells are unique', function () {
+        var cells3d = [[0,1,2,3],[2,3,1,4]];
+        var cells2d = [
+              /*[1,2,3]*/,[3,2,0],[0,1,3],[2,1,0]
+            , [3,1,4],[4,1,2],[2,3,4]/*,[1,3,2]*/
+            ];
+        var cells1d = [/*
+              [2,3],[3,1],[1,2]  
+            , [2,0],[0,3],[3,2]
+            , [1,3],[3,0],[0,1]
+            , [1,0],[0,2],[2,1]
+
+            , [1,4],[4,3],[3,1]
+            , [1,2],[2,4],[4,1]
+            , [3,4],[4,2],[2,3]
+            , [3,2],[2,1],[1,3] */
+            ];
+          var expectedFaces = [
+                new Uint32Array([]) // 0D 
+              , new Uint32Array(simplexn._flat(cells1d)) // 1D
+              , new Uint32Array(simplexn._flat(cells2d)) // 2D
+              ];
+          var topology = new simplexn.Topology(cells3d);
+          var boundary = topology.boundary(1);
+          var complexes = boundary.complexes;
+
+        expect(complexes).to.be.a(Array);
+        expect(complexes[0]).to.be.a(Uint32Array);
+        expect(complexes[1]).to.be.a(Uint32Array);
+        expect(complexes[2]).to.be(undefined);
+        expect(complexes[3]).to.be(undefined);
+        expect(simplexn._areEqual(complexes[0], expectedFaces[0])).to.be.ok(); 
+        expect(simplexn._areEqual(complexes[1], expectedFaces[1])).to.be.ok(); 
+        expect(topology.dim).to.be(1);
+      });
+
     });
   });
 
