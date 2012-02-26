@@ -1,5 +1,8 @@
 !(function () {
 
+  var _flat = simplexn._utils._flat;
+  var _areEqual = simplexn._utils._areEqual;
+
   describe('PointSet', function () {
   
     describe('#equals(pointSet)', function () {
@@ -106,7 +109,7 @@
         var pointset = new simplexn.PointSet(points, 3);
         var indices = pointset.merge(1e-2);
 
-        expect(simplexn._areEqual(indices, expectedIndices)).to.be.ok();
+        expect(_areEqual(indices, expectedIndices)).to.be.ok();
         expect(pointset.equals(expectedPointset)).to.be.ok();
       });
 
@@ -119,7 +122,7 @@
         var pointset = new simplexn.PointSet(points, 3);
         var indices = pointset.merge(1e-2);
 
-        expect(simplexn._areEqual(indices, expectedIndices)).to.be.ok();
+        expect(_areEqual(indices, expectedIndices)).to.be.ok();
         expect(pointset.equals(expectedPointset)).to.be.ok();
       });
 
@@ -132,7 +135,7 @@
         var pointset = new simplexn.PointSet(points, 3);
         var indices = pointset.merge(1e-2);
 
-        expect(simplexn._areEqual(indices, expectedIndices)).to.be.ok();
+        expect(_areEqual(indices, expectedIndices)).to.be.ok();
         expect(pointset.equals(expectedPointset)).to.be.ok();
       });
 
@@ -145,7 +148,7 @@
         var pointset = new simplexn.PointSet(points, 3);
         var indices = pointset.merge(1e-1);
 
-        expect(simplexn._areEqual(indices, expectedIndices)).to.be.ok();
+        expect(_areEqual(indices, expectedIndices)).to.be.ok();
         expect(pointset.equals(expectedPointset)).to.be.ok();
       });
 
