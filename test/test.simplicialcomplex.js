@@ -1,5 +1,8 @@
 !(function () {
 
+  var _flat = simplexn._utils._flat;
+  var _areEqual = simplexn._utils._areEqual;
+
   describe('SimplicialComplex', function () {
 
     describe('#equals(simpcomp)', function () {
