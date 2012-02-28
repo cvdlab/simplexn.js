@@ -79,7 +79,7 @@
       it('correctly instantiates a cuboidal simplicial complex', function () {
         var cuboid = simplexn.geometries.cuboid([3,2,1]);
         var points = [[0,0,0],[3,0,0],[0,2,0],[3,2,0],[0,0,1],[3,0,1],[0,2,1],[3,2,1]];
-        var cells = [[0,1,2,4],[1,2,4,5],[2,4,5,6],[1,3,2,5],[3,2,5,7],[2,5,7,6]];
+        var cells = [[0,1,2,4],[1,2,4,5],[2,4,5,6],[1,2,5,3],[2,3,6,5],[3,5,7,6]];
         var simpcomp = new simplexn.SimplicialComplex(points,cells);
 
         expect(cuboid.equals(simpcomp)).to.be.ok();
@@ -90,7 +90,7 @@
       it('correctly instantiates a 3D cube', function () {
         var cube = simplexn.geometries.cube(3);
         var points = [[0,0,0],[1,0,0],[0,1,0],[1,1,0],[0,0,1],[1,0,1],[0,1,1],[1,1,1]];
-        var cells = [[0,1,2,4],[1,2,4,5],[2,4,5,6],[1,3,2,5],[3,2,5,7],[2,5,7,6]];
+        var cells = [[0,1,2,4],[1,2,4,5],[2,4,5,6],[1,2,5,3],[2,3,6,5],[3,5,7,6]];
         var simpcomp = new simplexn.SimplicialComplex(points,cells);
 
         expect(cube.equals(simpcomp)).to.be.ok();
