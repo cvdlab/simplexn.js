@@ -116,9 +116,9 @@
         var hlist = [1,1];
         var expectedPoints = [[0,0,0],[1,0,0],[0,1,0],[1,1,0],[0,0,1],[1,0,1],[0,1,1],[1,1,1],[0,0,2],[1,0,2],[0,1,2],[1,1,2]];
         var expectedCells3d = [[0,1,2,4],[1,2,4,5],[2,4,5,6],
-                               [2,1,3,6],[1,3,6,5],[3,6,5,7],
+                               [1,2,5,3],[2,3,6,5],[3,5,7,6],
                                [4,5,6,8],[5,6,8,9],[6,8,9,10],
-                               [6,5,7,10],[5,7,10,9],[7,10,9,11]];
+                               [5,6,9,7],[6,7,10,9],[7,9,11,10]];
         var expectedSimpcomp = new simplexn.SimplicialComplex(expectedPoints, expectedCells3d);
         var simpcomp = new simplexn.SimplicialComplex(points, cells2d);
           ;
@@ -155,9 +155,9 @@
                                 [0,0,3],[1,0,3],[0,1,3],[1,1,3],
                                 [0,0,4],[1,0,4],[0,1,4],[1,1,4]];
         var expectedCells3d = [[0,1,2,4],[1,2,4,5],[2,4,5,6],
-                               [2,1,3,6],[1,3,6,5],[3,6,5,7],
+                               [1,2,5,3],[2,3,6,5],[3,5,7,6],
                                [8,9,10,12],[9,10,12,13],[10,12,13,14],
-                               [10,9,11,14],[9,11,14,13],[11,14,13,15]];
+                               [9,10,13,11],[10,11,14,13],[11,13,15,14]];
         var expectedSimpcomp = new simplexn.SimplicialComplex(expectedPoints,expectedCells3d);
         var simpcomp = new simplexn.SimplicialComplex(points, cells2d);
 
