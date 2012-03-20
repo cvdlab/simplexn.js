@@ -1,0 +1,27 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Simplexn tests</title>
+  <link rel="stylesheet" href="../dev/mocha.css" />
+  <script src="../dev/jquery.js"></script>
+  <script src="../dev/expect.js"></script>
+  <script src="../dev/mocha.js"></script>
+  <script src="../support/numeric.js"></script>
+  <script src="../lib/simplexn.js"></script>
+  <script>mocha.setup('bdd')</script>
+  <script src="test.pointset.js"></script>
+  <script src="test.topology.js"></script>
+  <script src="test.simplicialcomplex.js"></script>
+  <script src="test.geometries.js"></script>
+  <script>
+    $(function () {
+      mocha
+        .run()
+        .globals(['foo', 'bar']) // acceptable globals
+    })
+  </script>
+</head>
+<body>
+  <div id="mocha"></div>
+</body>
+</html>
