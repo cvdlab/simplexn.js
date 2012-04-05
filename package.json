@@ -16,7 +16,7 @@
       "url": "http://spini.no.de"
     }
   ],
-  "name": "simplexn",
+  "name": "simplexn.js",
   "description": "dimension-independent geometric kernel based on simplicial complex",
   "version": "0.1.3",
   "homepage": "https://github.com/cvd-lab/simplexn",
