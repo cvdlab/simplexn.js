@@ -19,10 +19,10 @@
   "name": "simplexn.js",
   "description": "dimension-independent geometric kernel based on simplicial complex",
   "version": "0.1.4",
-  "homepage": "https://github.com/cvd-lab/simplexn",
+  "homepage": "https://github.com/cvd-lab/simplexn.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/cvd-lab/simplexn.git"
+    "url": "git://github.com/cvd-lab/simplexn.js.git"
   },
   "main": "index.js",
   "engines": {
