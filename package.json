@@ -6,7 +6,7 @@
   },
   "name": "simplexn",
   "description": "dimension-independent geometric kernel based on simplicial complex",
-  "version": "0.0.0",
+  "version": "0.1.2",
   "homepage": "https://github.com/cvd-lab/simplexn",
   "repository": {
     "type": "git",
