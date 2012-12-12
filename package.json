@@ -4,7 +4,7 @@
     "email" : "cvdlab@email.com",
     "url" : "https://github.com/cvdlab/"
   },
-  "contributors": [ 
+  "contributors": [
     {
       "name": "Enrico Marino",
       "email": "enrico.marino@email.com",
@@ -18,7 +18,7 @@
   ],
   "name": "simplexn.js",
   "description": "dimension-independent geometric kernel based on simplicial complex",
-  "version": "0.1.5",
+  "version": "0.1.8",
   "homepage": "https://github.com/cvdlab/simplexn.js",
   "repository": {
     "type": "git",
